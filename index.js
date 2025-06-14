@@ -6,8 +6,6 @@ app.use(cors());
 const port = 5000;
 
 const products = [
-    { id: 1, productName: "Mobile", price: 2000, category: "Electronic" },
-    { id: 2, productName: "TV", price: 22000, category: "Electronic" }
 ]
 
 app.get('/products', async (req, res) => {
@@ -26,12 +24,13 @@ app.get('/products/:id', async (req, res) => {
 });
 
 app.post('/products', async (req, res) => {
-    const { productName, price, category } = req.body;
+    const { productName, price, category, image } = req.body;
     const newProduct = {
         id: products.length ? products[products.length - 1].id + 1 : 1,
         productName,
         price,
-        category
+        category,
+        image: image || ""
     };
     products.push(newProduct);
     res.status(201).json(newProduct);
@@ -39,11 +38,11 @@ app.post('/products', async (req, res) => {
 
 app.put('/products/:id', async (req, res) => {
     const id = parseInt(req.params.id);
-    const { productName, price, category } = req.body;
+    const { productName, price, category, image } = req.body;
     const index = products.findIndex(p => p.id === id);
 
     if (index !== -1) {
-        products[index] = { id, productName, price, category };
+        products[index] = { id, productName, price, category, image: image || "" };
         res.status(200).json(products[index]);
     } else {
         res.status(404).json({ message: "Product not found" });
