@@ -4,8 +4,7 @@ const port = 5000;
 
 const products = [
     { id: 1, productName: "Mobile", price: 2000 },
-    { id: 2, productName: "TV", price: 22000 },
-    { id: 3, productName: "Washing Machine", price: 35000 },
+    { id: 2, productName: "TV", price: 22000 }
 ]
 
 app.get('/products', (req, res) => {
